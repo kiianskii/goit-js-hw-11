@@ -15,9 +15,23 @@
   </head>
   <body>
     <section>
-      <form><input type="text" name="" id="" /><button>Search</button></form>
+      <form class="search-form">
+        <input
+          class="name-input"
+          type="text"
+          name="data"
+          id="name"
+          placeholder="Search images..."
+          required
+        /><button class="search-button">Search</button>
+      </form>
+
+      <ul class="gallery">
+        <span class="loader is-hide"></span>
+      </ul>
     </section>
 
     <script type="module" src="./main.js"></script>
+    <script type="module" src="./js/pixabay-API.js"></script>
   </body>
 </html>
