@@ -29,7 +29,12 @@
     transform: rotate(360deg);
   }
 }
+.wrapper {
+  display: flex;
+  justify-content: center;
 
+  margin-top: 40px;
+}
 .is-hide {
   display: none;
 }

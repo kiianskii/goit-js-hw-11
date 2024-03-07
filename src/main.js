@@ -1,25 +1,34 @@
 import { getImages } from "./js/pixabay-API";
-import { renderImages } from "./js/render-functions";
+import { renderImages, clearMarkup } from "./js/render-functions";
 import { showLoader, hideLoader, showMessage } from "./js/modules/helpers";
 
 const formEl = document.querySelector(".search-form")
+
+const msgErr = "Sorry, there are no images matching your search query. Please try again!";
+const msgEmpty = "Error, empty field";
 
 formEl.addEventListener("submit", onSubmitBtn);
 
 function onSubmitBtn(e){
     e.preventDefault();
-    showLoader()
+    showLoader();
+    clearMarkup();
 
     const userValue = e.target.elements.data.value.trim().split(" ")
     const userWord = userValue.filter(word => word).join('+');
-
+    if (!userWord) {
+        clearMarkup()
+        showMessage(msgEmpty)
+        hideLoader()
+        return;
+    }
     getImages(userWord).then(res => {
-        const imageArray = [...res.hits];
-        if (imageArray.length === 0) {
+
+        if (res.hits.length === 0) {
             hideLoader();
-            showMessage();
+            showMessage(msgErr);
         } else {
-            renderImages(imageArray)
+            renderImages(res.hits)
         }
     }).catch(console.log).finally(() => {
         hideLoader()
