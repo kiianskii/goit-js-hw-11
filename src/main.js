@@ -19,7 +19,7 @@ function onSubmitBtn(e){
             hideLoader();
             showMessage();
         } else {
-            renderImages(res.hits)
+            renderImages(imageArray)
         }
     }).catch(console.log).finally(() => {
         hideLoader()
